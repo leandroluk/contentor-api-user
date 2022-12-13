@@ -7,6 +7,27 @@ const commonResponses = {
   401: { description: 'Unauthorized' }
 };
 
+const snapshotDTO: OpenAPIV3.SchemaObject = {
+  type: 'object',
+  properties: {
+    _sid: {
+      type: 'string',
+      format: 'uuid',
+      example: '00000000-0000-0000-0000-000000000000'
+    },
+    _ctor: {
+      type: 'string',
+      format: 'uuid',
+      example: '00000000-0000-0000-0000-000000000000'
+    },
+    _ttl: {
+      type: 'string',
+      format: 'datetime',
+      example: new Date().toJSON()
+    }
+  }
+};
+
 const userDTO: OpenAPIV3.SchemaObject = {
   type: 'object',
   properties: {
@@ -84,27 +105,18 @@ const docs: OpenAPIV3.Document = {
   openapi: '3.0.3',
   info: {
     title: env.app.name,
-    description: 'Service to manage Authentication, Users, Accounts and Permissions',
+    description: 'Service to manage Users',
     version: env.app.version
   },
   servers: [
-    {
-      description: 'Local',
-      url: `http://localhost:${env.app.port}`
-    }
+    { url: `http://localhost:${env.app.port}` },
+    ...env.app.servers.split(',').filter(_ => _).map(url => ({ url }))
   ],
   tags: [
-    {
-      name: 'auth',
-      description: 'Routes related with authentication'
-    },
-    {
-      name: 'user',
-      description: 'Routes related with user'
-    }
+    { name: 'user' }
   ],
   paths: {
-    '/api/user/search': {
+    '/api/user/_search': {
       post: {
         tags: ['user'],
         security: [{ bearerAuth: [] }],
@@ -140,19 +152,50 @@ const docs: OpenAPIV3.Document = {
         }
       }
     },
-    '/api/user/{user_uid}/rollback': {
+    '/api/user/{user_uid}/_history': {
+      get: {
+        tags: ['user'],
+        security: [{ bearerAuth: [] }],
+        description: 'Route to view user history',
+        parameters: [
+          { in: 'path', name: 'user_uid', schema: { type: 'integer' }, required: true }
+        ],
+        responses: {
+          200: {
+            description: 'List of user changes',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      ...snapshotDTO.properties,
+                      ...userDTO.properties
+                    }
+                  }
+                }
+              }
+            }
+          },
+          400: commonResponses[400],
+          401: commonResponses[401],
+          404: {
+            description: 'User not found'
+          },
+          409: {
+            description: 'User already enabled'
+          }
+        }
+      }
+    },
+    '/api/user/{user_uid}/_rollback': {
       delete: {
         tags: ['user'],
         security: [{ bearerAuth: [] }],
         description: 'Route to enable a disabled user',
         parameters: [
-          {
-            in: 'path',
-            name: 'user_uid',
-            schema: { type: 'integer' },
-            required: true,
-            description: 'Key of user'
-          }
+          { in: 'path', name: 'user_uid', schema: { type: 'integer' }, required: true }
         ],
         responses: {
           200: {
@@ -180,13 +223,7 @@ const docs: OpenAPIV3.Document = {
         security: [{ bearerAuth: [] }],
         description: 'Route to disable an active user',
         parameters: [
-          {
-            in: 'path',
-            name: 'user_uid',
-            schema: { type: 'integer' },
-            required: true,
-            description: 'Key of user'
-          }
+          { in: 'path', name: 'user_uid', schema: { type: 'integer' }, required: true }
         ],
         responses: {
           204: {
@@ -207,13 +244,7 @@ const docs: OpenAPIV3.Document = {
         security: [{ bearerAuth: [] }],
         description: 'Route to edit an user',
         parameters: [
-          {
-            in: 'path',
-            name: 'user_uid',
-            schema: { type: 'integer' },
-            required: true,
-            description: 'Key of user'
-          }
+          { in: 'path', name: 'user_uid', schema: { type: 'integer' }, required: true }
         ],
         requestBody: {
           content: {
@@ -271,13 +302,7 @@ const docs: OpenAPIV3.Document = {
         security: [{ bearerAuth: [] }],
         description: 'Route to get an user',
         parameters: [
-          {
-            in: 'path',
-            name: 'user_uid',
-            schema: { type: 'integer' },
-            required: true,
-            description: 'Key of user'
-          }
+          { in: 'path', name: 'user_uid', schema: { type: 'integer' }, required: true }
         ],
         responses: {
           200: {

@@ -40,17 +40,17 @@ userRoutes.delete('/:_uid', async (req, res) => {
   res.sendStatus(204);
 });
 
-// getUser
-userRoutes.get('/:_uid', async (req, res) => {
-  const result = await container
-    .resolve<IGetUserCase>('IGetUserCase').get(req as any);
-  res.json(result);
-});
-
 // editUser
 userRoutes.put('/:_uid', async (req, res) => {
   const result = await container
     .resolve<IEditUserCase>('IEditUserCase').edit(req as any);
+  res.json(result);
+});
+
+// getUser
+userRoutes.get('/:_uid', async (req, res) => {
+  const result = await container
+    .resolve<IGetUserCase>('IGetUserCase').get(req as any);
   res.json(result);
 });
 

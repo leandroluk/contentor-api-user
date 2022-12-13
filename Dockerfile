@@ -10,6 +10,7 @@ ENV \
   # APP
   NODE_ENV="development" \
   PORT="3000" \
+  SERVERS="" \
   # JWT
   JWT_SECRET="secret" \
   JWT_AUGORITHM="HS256" \

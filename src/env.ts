@@ -7,7 +7,8 @@ const env = {
     env: _.NODE_ENV ?? 'development',
     name: packageJson.name,
     version: packageJson.version,
-    port: Number(_.PORT ?? 3000)
+    port: Number(_.PORT ?? 3000),
+    servers: _.SERVERS ?? ''
   },
   jwt: {
     secret: (_.JWT_SECRET ?? 'secret').replace(/\\n/g, '\n'),
