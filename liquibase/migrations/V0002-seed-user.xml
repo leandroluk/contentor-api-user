@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+  <changeSet id="1668732338139-seed-user" author="leandro.santiago">
+    <sql>
+      INSERT INTO "user" ("_uid", "display_name", "email", "password") 
+      VALUES (
+        'a2d9ff97-2c95-4da0-98e0-5492e9755495', 
+        'Super User',
+        'superuser@email.com', 
+        '4072d7365233d8ede7ca8548543222dfb96b17780aa8d6ff93ab69c0985ef21fc8105d03590a61b9' /* Test@123 */
+      ); 
+    </sql>
+
+    <rollback>
+      <sql>
+        DELETE FROM "user" WHERE "email" = 'superuser@email.com';
+      </sql>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="1668732338139-tag" author="leandro.santiago">
+    <tagDatabase tag="1668732338139" />
+  </changeSet>
+</databaseChangeLog>

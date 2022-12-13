@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "a4f4746b-ebc6-4445-abc9-63cef15d3cba",
+    "name": "local",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2022-12-08T15:51:55.743Z",
+    "modified": "2022-12-08T15:51:55.744Z",
+    "data": [
+      {
+        "name": "host",
+        "value": "http://localhost:3000"
+      },
+      {
+        "name": "_uid",
+        "value": "4671d3f6-8c95-4900-89f7-b8420ba5da28"
+      }
+    ]
+  }
+]

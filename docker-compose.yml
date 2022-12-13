@@ -1,0 +1,63 @@
+version: '3'
+
+networks:
+  contentor-api-user: 
+    name: contentor-api-user
+
+services:
+# database.compose
+  postgres:
+    image: postgres
+    hostname: postgres
+    container_name: postgres
+    networks: [ contentor-api-user ]
+    ports: [ 5432:5432 ]
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: contentor-api-user
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+  liquibase:
+    image: liquibase/liquibase
+    hostname: liquibase
+    container_name: liquibase
+    networks: [ contentor-api-user ]
+    depends_on: [ postgres ]
+    volumes: [ ./liquibase:/liquibase/changelog ]
+    command: "bash -c 'liquibase \
+                       --url=jdbc:postgresql://postgres:5432/contentor-api-user \
+                       --searchPath=/liquibase/changelog \
+                       --changeLogFile=changelog.xml \
+                       --username=postgres \
+                       --password=postgres \
+                       --databaseChangeLogTableName=_changelog \
+                       --databaseChangeLogLockTableName=_changelog_lock \
+                       update'"
+# search-engine.compose
+  elasticsearch:
+    image: elasticsearch:7.17.7
+    hostname: elasticsearch
+    container_name: elasticsearch
+    networks: [ contentor-api-user ]
+    ports: [ 9200:9200 ]
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      discovery.type: single-node
+      xpack.security.enabled: 'false'
+    healthcheck:
+      test: [ 'CMD', 'curl',  '--fail' , 'http://elasticsearch:9200/_cluster/health?wait_for_status=green&timeout=1s', '||', 'exit', '1' ]
+      interval: 5s
+      timeout: 3s
+  kibana:
+    image: kibana:7.17.7
+    hostname: kibana
+    container_name: kibana
+    networks: [ contentor-api-user ]
+    ports: [ 5601:5601 ]
+    depends_on: [ elasticsearch ]
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'

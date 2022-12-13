@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+  <changeSet id="1668732251370-create-table-user" author="leandro.santiago">
+    <sql>
+      CREATE TABLE "user" (
+        "_uid" UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+        "_created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+        "_updated" TIMESTAMP(3) NULL,
+        "_disabled" TIMESTAMP(3) NULL,
+        "display_name" VARCHAR(100) NOT NULL,
+        "email" VARCHAR(100) NOT NULL UNIQUE,
+        "password" TEXT NOT NULL
+      );
+    </sql>
+
+    <rollback>
+      <sql>
+        DROP TABLE "user";
+      </sql>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="1668732251370-tag" author="leandro.santiago">
+    <tagDatabase tag="1668732251370" />
+  </changeSet>
+</databaseChangeLog>

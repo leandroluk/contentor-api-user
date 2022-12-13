@@ -1,0 +1,166 @@
+[
+  {
+    "_id": "602305f0-3b4a-492e-9284-f559945a97b7",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "",
+    "name": "getHealth",
+    "url": "{{host}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-12-08T15:53:15.452Z",
+    "modified": "2022-12-08T15:53:19.953Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "73c2449b-9cc9-4554-bdaf-053a08806fa8",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "addUser",
+    "url": "{{host}}/api/user",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-12-08T15:53:45.477Z",
+    "modified": "2022-12-13T17:16:48.643Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"displayName\": \"{{#string}}\",\n  \"email\": \"{{#email}}\",\n  \"password\": \"Teste@123\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json._uid",
+        "action": "setto",
+        "value": "{{_uid}}"
+      }
+    ]
+  },
+  {
+    "_id": "04fb1de6-e7c0-43aa-b741-74194a98d8c8",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "editUser",
+    "url": "{{host}}/api/user/{{_uid}}",
+    "method": "PUT",
+    "sortNum": 32500,
+    "created": "2022-12-13T17:14:56.854Z",
+    "modified": "2022-12-13T17:17:03.955Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"displayName\": \"{{#string}}\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f5bcdeee-5405-4a9e-bcc1-be16b852d905",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "disableUser",
+    "url": "{{host}}/api/user/{{_uid}}",
+    "method": "DELETE",
+    "sortNum": 7109.4,
+    "created": "2022-12-13T17:17:02.032Z",
+    "modified": "2022-12-13T17:22:05.299Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4a00aed2-f484-45cb-88ad-82c486f2b52f",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "getUser",
+    "url": "{{host}}/api/user/{{_uid}}",
+    "method": "GET",
+    "sortNum": 8125,
+    "created": "2022-12-13T17:17:27.251Z",
+    "modified": "2022-12-13T17:17:43.958Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a7ad6a32-4e44-4d0d-9fb0-efc3cb911198",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "enableUser",
+    "url": "{{host}}/api/user/{{_uid}}/_rollback",
+    "method": "DELETE",
+    "sortNum": 6855.5,
+    "created": "2022-12-13T17:22:02.782Z",
+    "modified": "2022-12-13T17:26:31.469Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "c8d7cb49-8f58-42c6-9f58-8bda72caba30",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "historyUser",
+    "url": "{{host}}/api/user/{{_uid}}/_history",
+    "method": "GET",
+    "sortNum": 6792.1,
+    "created": "2022-12-13T17:23:57.278Z",
+    "modified": "2022-12-13T17:26:28.174Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "2539b2c2-fa0e-45d7-910c-7d0c61d7f281",
+    "colId": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "containerId": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+    "name": "searchUser",
+    "url": "{{host}}/api/user/_search",
+    "method": "POST",
+    "sortNum": 6728.6,
+    "created": "2022-12-13T17:24:31.161Z",
+    "modified": "2022-12-13T17:26:25.198Z",
+    "headers": [
+      {
+        "name": "from",
+        "value": "{{#guid}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  }
+]

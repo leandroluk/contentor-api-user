@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "670bd3b4-b984-4322-b002-e7f5c235f3cf",
+    "colName": "contentor-api-user",
+    "created": "2022-12-08T15:53:02.851Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "d50a6977-5cbd-444b-8847-13a7f352baba",
+        "name": "api",
+        "containerId": "",
+        "created": "2022-12-08T15:53:29.849Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "9e44cea8-9acf-4f07-a2bc-a134cd58ef31",
+        "name": "user",
+        "containerId": "d50a6977-5cbd-444b-8847-13a7f352baba",
+        "created": "2022-12-08T15:53:34.024Z",
+        "sortNum": 20000
+      }
+    ]
+  }
+]
