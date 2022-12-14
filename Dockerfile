@@ -11,13 +11,6 @@ ENV \
   NODE_ENV="development" \
   PORT="3000" \
   SERVERS="" \
-  # JWT
-  JWT_SECRET="secret" \
-  JWT_AUGORITHM="HS256" \
-  JWT_AUDIENCE="audience" \
-  JWT_ISSUER="issuer" \
-  JWT_ACCESS_TTL=600 \
-  JWT_REFRESH_TTL=1209600 \
   # DB
   DB_LIMIT=50 \
   DB_POSTGRES="postgresql://postgres:postgres@localhost:5432/contentor-api-user" \

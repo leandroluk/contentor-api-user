@@ -10,14 +10,6 @@ const env = {
     port: Number(_.PORT ?? 3000),
     servers: _.SERVERS ?? ''
   },
-  jwt: {
-    secret: (_.JWT_SECRET ?? 'secret').replace(/\\n/g, '\n'),
-    algorithm: _.JWT_AUGORITHM ?? 'HS256',
-    audience: _.JWT_AUDIENCE ?? 'audience',
-    issuer: _.JWT_ISSUER ?? 'issuer',
-    accessTTL: Number(_.JWT_ACCESS_TTL ?? 60 * 10), // default 10 minutes
-    refreshTTL: Number(_.JWT_REFRESH_TTL ?? 60 * 60 * 24 * 14) // default 14 days
-  },
   db: {
     limit: Number(_.DB_LIMIT ?? 50),
     postgres: _.DB_POSTGRES ?? 'postgresql://postgres:postgres@localhost:5432/contentor-api-user',
