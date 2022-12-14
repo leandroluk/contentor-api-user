@@ -9,7 +9,8 @@ const config: Config.InitialOptions = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/**/index.ts',
     '!<rootDir>/src/env.ts',
-    '!<rootDir>/src/logger.ts'
+    '!<rootDir>/src/logger.ts',
+    '!<rootDir>/src/main/docs.ts'
   ],
   testEnvironment: 'node',
   testMatch: ['**/*.spec.ts', '**/*.test.ts'],
