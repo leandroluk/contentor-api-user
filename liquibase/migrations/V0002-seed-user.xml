@@ -7,7 +7,7 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
                       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
                       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-  <changeSet id="1668732338139-seed-user" author="leandro.santiago">
+  <changeSet id="V0002-seed-user" author="leandro.santiago">
     <sql>
       INSERT INTO "user" ("_uid", "display_name", "email", "password") 
       VALUES (
@@ -25,7 +25,7 @@
     </rollback>
   </changeSet>
 
-  <changeSet id="1668732338139-tag" author="leandro.santiago">
-    <tagDatabase tag="1668732338139" />
+  <changeSet id="V0002-tag" author="leandro.santiago">
+    <tagDatabase tag="V0002" />
   </changeSet>
 </databaseChangeLog>

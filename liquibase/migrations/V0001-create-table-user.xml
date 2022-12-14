@@ -7,7 +7,7 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
                       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
                       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-  <changeSet id="1668732251370-create-table-user" author="leandro.santiago">
+  <changeSet id="V0001-create-table-user" author="leandro.santiago">
     <sql>
       CREATE TABLE "user" (
         "_uid" UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -27,7 +27,7 @@
     </rollback>
   </changeSet>
 
-  <changeSet id="1668732251370-tag" author="leandro.santiago">
-    <tagDatabase tag="1668732251370" />
+  <changeSet id="V0001-tag" author="leandro.santiago">
+    <tagDatabase tag="V0001" />
   </changeSet>
 </databaseChangeLog>
